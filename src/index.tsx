@@ -1,10 +1,15 @@
-import { someFn } from "./test";
+import { BrowserRouter } from "react-router-dom";
+import App from "./app/App";
 import { render } from "react-dom";
-import classes from "./styles.module.scss";
+import { ThemeProvider } from "app/providers/ThemeProviders";
 
-someFn(1);
+import "shared/config/i18n/i18n";
 
 render(
-  <div className={classes.color}>skdjbfkdsjfn</div>,
+  <BrowserRouter>
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>,
   document.getElementById("root")
 );
