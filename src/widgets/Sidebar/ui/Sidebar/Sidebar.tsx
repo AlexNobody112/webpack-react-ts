@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { classNames } from "shared/lib/heplers/classNames";
-import cls from "./Sidebar.module.scss";
+import React, { useState } from 'react';
+import { classNames } from 'shared/lib/heplers/classNames';
+import Button from 'shared/ui/Button/Button';
+import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
   className?: string;
-  children?: React.ReactNode;
 }
 
-export const Sidebar = (props: SidebarProps) => {
+export function Sidebar(props: SidebarProps) {
   const [collapsed, setCollapsed] = useState(false);
   const onToggle = () => {
     setCollapsed((state) => !state);
@@ -19,7 +19,7 @@ export const Sidebar = (props: SidebarProps) => {
         className,
       ])}
     >
-      <button onClick={onToggle}>toggle</button>
+      <Button onClick={onToggle}>toggle</Button>
     </div>
   );
-};
+}

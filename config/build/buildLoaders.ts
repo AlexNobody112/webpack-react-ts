@@ -1,25 +1,27 @@
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import webpack from "webpack";
-import { BuildOptions } from "./types/buildOptions";
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import webpack from 'webpack';
+import { BuildOptions } from './types/buildOptions';
 
-export function buildLoader(options: BuildOptions): webpack.RuleSetRule[] {
+export default function buildLoader(
+  options: BuildOptions,
+): webpack.RuleSetRule[] {
   const typescriptLoader = {
     test: /\.tsx?$/,
-    use: "ts-loader",
+    use: 'ts-loader',
     exclude: /node_modules/,
   };
 
   const svgLoader = {
     test: /\.svg$/i,
     issuer: /\.[jt]sx?$/,
-    use: ["@svgr/webpack"],
+    use: ['@svgr/webpack'],
   };
 
   const fileLoader = {
     test: /\.(png|jpe?g|gif)$/i,
     use: [
       {
-        loader: "file-loader",
+        loader: 'file-loader',
       },
     ],
   };
@@ -27,23 +29,23 @@ export function buildLoader(options: BuildOptions): webpack.RuleSetRule[] {
   const cssLoader = {
     test: /\.s[ac]ss$/i,
     use: [
-      options.isDev ? "style-loader" : MiniCssExtractPlugin.loader,
+      options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
       {
-        loader: "css-loader",
+        loader: 'css-loader',
         options: {
           modules: {
-            auto: (resPath: string) => Boolean(resPath.includes(".module.")),
+            auto: (resPath: string) => Boolean(resPath.includes('.module.')),
             localIdentName: options.isDev
-              ? "[path][name]__[local]--[hash:base64:8]"
-              : "[hash:base64:8]",
+              ? '[path][name]__[local]--[hash:base64:8]'
+              : '[hash:base64:8]',
           },
         },
       },
-      "sass-loader",
+      'sass-loader',
     ],
   };
 
-  const babelLoader =  {
+  const babelLoader = {
     rules: [
       {
         test: /\.(?:js|mjs|cjs)$/,
@@ -51,14 +53,12 @@ export function buildLoader(options: BuildOptions): webpack.RuleSetRule[] {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: [
-              ['@babel/preset-env', { targets: "defaults" }]
-            ]
-          }
-        }
-      }
-    ]
-  }
+            presets: [['@babel/preset-env', { targets: 'defaults' }]],
+          },
+        },
+      },
+    ],
+  };
 
   return [typescriptLoader, cssLoader, svgLoader, babelLoader, fileLoader];
 }
