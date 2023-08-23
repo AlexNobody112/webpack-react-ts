@@ -10,18 +10,6 @@ module.exports = {
     'airbnb',
     'airbnb-typescript',
   ],
-  overrides: [
-    {
-      env: {
-        node: true,
-        jest: true,
-      },
-      files: ['.eslintrc.{js,cjs}'],
-      parserOptions: {
-        sourceType: 'script',
-      },
-    },
-  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 'latest',
@@ -35,7 +23,7 @@ module.exports = {
         '.js', '.jsx', '.tsx',
       ],
     }],
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'error',
     'no-shadow': 'off',
     'no-underscore-dangle': ['error', {
       allowFunctionParams: true,
@@ -51,26 +39,41 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/no-unused-prop-types': ['error', { ignore: ['children'] }],
     '@typescript-eslint/no-unused-vars': ['warn'],
-    '@typescript-eslint/naming-convention': ['warn', {
-      selector: 'variable',
-      modifiers: ['global'],
-      format: ['camelCase', 'UPPER_CASE'],
-      filter: {
-        regex: '/__[A-Z_]+_[A-Z_]+__/gm',
-        match: true,
-      },
-    }],
-    'max-len': ['error', { ignoreComments: true }],
+    'max-len': ['error', { ignoreComments: true, code: 100 }],
   },
   globals: {
     __IS_DEV__: true,
   },
-  // overrides: [
-  //   {
-  //     files: ["webpack.dev.js", "webpack.prod.js"],
-  //     rules: {
-  //       "import/no-extraneous-dependencies": { devDependencies: true },
-  //     },
-  //   },
-  // ],
+  overrides: [
+    {
+      env: {
+        node: true,
+        jest: true,
+      },
+      files: ['.eslintrc.{js,cjs}'],
+      parserOptions: {
+        sourceType: 'script',
+      },
+    },
+    {
+      files: ['**/src/app/types/*.d.ts'],
+      rules: {
+        '@typescript-eslint/naming-convention': ['warn', {
+          selector: 'variable',
+          modifiers: ['global'],
+          format: ['camelCase', 'UPPER_CASE'],
+          filter: {
+            regex: '/__[A-Z_]+_[A-Z_]+__/gm',
+            match: true,
+          },
+        }],
+      },
+    },
+    {
+      files: ['**/src/shared/lib/heplers/classNames.ts'],
+      rules: {
+        'no-unused-vars': 'warn',
+      },
+    },
+  ],
 };

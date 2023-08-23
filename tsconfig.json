@@ -23,6 +23,7 @@
     ".eslintrc.js",
     "./babel.config.js",
     "src",
-    "./"
+    "./",
+    "./config/jest/setupTests.ts"
   ]
 }
