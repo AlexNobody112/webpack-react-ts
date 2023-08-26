@@ -1,9 +1,11 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { classNames } from 'shared/lib/heplers/classNames';
 import cls from './Button.module.scss';
+import 'app/styles/index.scss';
 
 export enum ThemeButton {
   CLEAR = 'clear',
+  OUTLINE = 'outline',
 }
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -12,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
 
-function Button(props: ButtonProps) {
+export function Button(props: ButtonProps) {
   const {
     className, children, theme, ...otherProps
   } = props;
@@ -26,5 +28,3 @@ function Button(props: ButtonProps) {
     </button>
   );
 }
-
-export default Button;

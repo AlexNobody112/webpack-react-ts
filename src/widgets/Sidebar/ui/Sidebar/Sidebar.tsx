@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { classNames } from 'shared/lib/heplers/classNames';
-import Button from 'shared/ui/Button/Button';
+import { Button } from 'shared/ui/Button/Button';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {

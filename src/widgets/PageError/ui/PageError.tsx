@@ -1,5 +1,5 @@
 import { classNames } from 'shared/lib/heplers/classNames';
-import Button from 'shared/ui/Button/Button';
+import { Button } from 'shared/ui/Button/Button';
 import cls from './PageError.module.scss';
 
 interface PageErrorProps {

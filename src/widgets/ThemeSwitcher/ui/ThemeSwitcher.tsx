@@ -4,7 +4,7 @@ import { classNames } from 'shared/lib/heplers/classNames';
 import Sun from 'shared/assets/icons/sun.svg';
 import Moon from 'shared/assets/icons/moon.svg';
 import { Theme } from 'app/providers/ThemeProviders';
-import Button, { ThemeButton } from 'shared/ui/Button/Button';
+import { Button, ThemeButton } from 'shared/ui/Button/Button';
 
 interface ThemeSwitcherProps {
   className?: string;

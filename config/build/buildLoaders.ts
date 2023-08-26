@@ -1,6 +1,7 @@
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 import { BuildOptions } from './types/buildOptions';
+import { buildCssLoader } from './loaders/buildCssLoader';
 
 export default function buildLoader(
   options: BuildOptions,
@@ -26,24 +27,7 @@ export default function buildLoader(
     ],
   };
 
-  const cssLoader = {
-    test: /\.s[ac]ss$/i,
-    use: [
-      options.isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-      {
-        loader: 'css-loader',
-        options: {
-          modules: {
-            auto: (resPath: string) => Boolean(resPath.includes('.module.')),
-            localIdentName: options.isDev
-              ? '[path][name]__[local]--[hash:base64:8]'
-              : '[hash:base64:8]',
-          },
-        },
-      },
-      'sass-loader',
-    ],
-  };
+  const cssLoader = buildCssLoader(options.isDev)
 
   const babelLoader = {
     rules: [
