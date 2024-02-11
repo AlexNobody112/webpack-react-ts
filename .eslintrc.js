@@ -56,7 +56,7 @@ module.exports = {
       },
     },
     {
-      files: ['**/src/app/types/*.d.ts'],
+      files: ['**/src/types/*.d.ts'],
       rules: {
         '@typescript-eslint/naming-convention': ['warn', {
           selector: 'variable',
